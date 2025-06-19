@@ -1,0 +1,734 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Creepster&family=Griffy&family=Nosifer&family=Butcherman&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Neue', cursive;
+    background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f, #06ffa5, #3d5afe, #b39ddb);
+    background-size: 400% 400%;
+    animation: gradientShift 3s ease infinite;
+    overflow-x: hidden;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">🤡</text></svg>'), auto;
+    position: relative;
+}
+
+/* Fake Loading Screen */
+.fake-loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    flex-direction: column;
+}
+
+.loading-container {
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 50px;
+    border-radius: 20px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-title {
+    font-size: 3em;
+    margin-bottom: 30px;
+    animation: colorFlash 1s ease-in-out infinite;
+}
+
+.loading-bar {
+    width: 400px;
+    height: 30px;
+    background: #333;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b35, #f7931e, #ffd23f);
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+.loading-text {
+    font-size: 1.2em;
+    margin: 20px 0;
+    animation: blink 1s ease-in-out infinite;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top: 5px solid #ff6b35;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+/* Animations */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes colorFlash {
+    0% { color: #ff0000; }
+    25% { color: #00ff00; }
+    50% { color: #0000ff; }
+    75% { color: #ffff00; }
+    100% { color: #ff0000; }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes glitch {
+    0% { transform: translateX(0); }
+    10% { transform: translateX(-5px) skewX(-10deg); }
+    20% { transform: translateX(5px) skewX(10deg); }
+    30% { transform: translateX(-3px) skewX(-5deg); }
+    40% { transform: translateX(3px) skewX(5deg); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes dance {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-10px) rotate(-5deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes runAway {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(150px); }
+    50% { transform: translateX(-150px); }
+    75% { transform: translateX(100px); }
+    100% { transform: translateX(0); }
+}
+
+/* Floating Elements */
+.floating-crime-warning {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    animation: spin 2s linear infinite, bounce 1s ease-in-out infinite alternate;
+    z-index: 9999;
+    font-size: 24px;
+}
+
+.audio-warning {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #ff4444;
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    animation: pulse 1s ease-in-out infinite;
+    z-index: 1000;
+}
+
+/* CAPTCHA Modal */
+.captcha-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+}
+
+.captcha-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    transform: rotate(2deg);
+    animation: shake 0.5s ease-in-out infinite;
+    border: 5px solid #ff0000;
+}
+
+.captcha-challenge {
+    font-family: 'Courier New', monospace;
+    font-size: 24px;
+    background: #f0f0f0;
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px dashed #333;
+    letter-spacing: 5px;
+    transform: rotate(-5deg) skew(10deg);
+    animation: glitch 2s ease-in-out infinite;
+}
+
+.captcha-content input {
+    padding: 10px;
+    font-size: 18px;
+    margin: 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+.captcha-content button {
+    background: #ff4444;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.captcha-attempts {
+    color: red;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Main Content */
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    transform: rotate(0.5deg);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+.title {
+    font-size: 3.5em;
+    color: #ff0000;
+    text-shadow: 3px 3px 0px #00ff00, 6px 6px 0px #0000ff;
+    margin-bottom: 20px;
+    animation: colorFlash 1s ease-in-out infinite;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #ffffff;
+    background: #000000;
+    padding: 15px;
+    display: inline-block;
+    transform: rotate(-2deg);
+    animation: dance 2s ease-in-out infinite;
+}
+
+.glitch-text {
+    animation: glitch 1s ease-in-out infinite;
+}
+
+.dancing-element {
+    animation: dance 2s ease-in-out infinite;
+}
+
+/* Crime Cards */
+.crimes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.crime-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 5px dashed #ff0000;
+    padding: 25px;
+    border-radius: 20px;
+    transform: rotate(1deg);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.crime-card:nth-child(even) {
+    transform: rotate(-1deg);
+}
+
+.crime-card:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 0, 0.9);
+}
+
+.crime-title {
+    font-size: 1.8em;
+    color: #8b0000;
+    margin-bottom: 15px;
+    text-decoration: underline overline;
+}
+
+/* Buttons */
+.criminal-button, .moving-button {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin: 10px;
+    font-family: 'Comic Neue', cursive;
+    font-weight: bold;
+}
+
+.moving-button:hover {
+    animation: runAway 0.8s ease-in-out;
+}
+
+.evasive-button {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 10px;
+    font-family: 'Comic Neue', cursive;
+    font-weight: bold;
+}
+
+/* Text Selection Hell */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: not-allowed;
+}
+
+.fake-selection {
+    background: #3498db;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: text;
+    position: relative;
+}
+
+/* Font Chaos */
+.font-chaos .random-font {
+    transition: font-family 0.5s ease;
+}
+
+/* Infinite Scroll */
+.infinite-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 2px solid #333;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.empty-content {
+    padding: 20px;
+    margin: 10px 0;
+    background: #f8f8f8;
+    border: 1px dashed #ccc;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Invisible Content */
+.invisible-content {
+    color: transparent;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 20px;
+    margin: 20px 0;
+    cursor: help;
+}
+
+.invisible-content:hover {
+    color: #000;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #000;
+}
+
+/* Error Messages */
+.fake-errors {
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+.error-message {
+    color: #ff0000;
+    margin: 10px 0;
+    padding: 8px;
+    border-left: 4px solid #ff0000;
+    background: rgba(255, 0, 0, 0.1);
+    animation: blink 2s ease-in-out infinite;
+}
+
+/* Video Warning */
+.video-warning {
+    background: #ff9999;
+    color: #8b0000;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ff0000;
+    border-radius: 8px;
+    font-weight: bold;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* Pop-up Ads */
+.popup-ads {
+    position: fixed;
+    z-index: 9998;
+}
+
+.popup-ad {
+    position: fixed;
+    background: linear-gradient(45deg, #ff0000, #ff6600);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    animation: popupMove 4s ease-in-out infinite;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes popupMove {
+    0% { top: 10%; left: 10%; }
+    25% { top: 10%; right: 10%; left: auto; }
+    50% { bottom: 10%; right: 10%; top: auto; }
+    75% { bottom: 10%; left: 10%; right: auto; }
+    100% { top: 10%; left: 10%; bottom: auto; }
+}
+
+/* Color Chaos */
+.rainbow-chaos {
+    animation: rainbowBg 2s linear infinite;
+}
+
+@keyframes rainbowBg {
+    0% { background: rgba(255, 0, 0, 0.8); }
+    16% { background: rgba(255, 165, 0, 0.8); }
+    32% { background: rgba(255, 255, 0, 0.8); }
+    48% { background: rgba(0, 255, 0, 0.8); }
+    64% { background: rgba(0, 0, 255, 0.8); }
+    80% { background: rgba(75, 0, 130, 0.8); }
+    100% { background: rgba(238, 130, 238, 0.8); }
+}
+
+.color-chaos p {
+    animation: textColorChaos 1s linear infinite;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+@keyframes textColorChaos {
+    0% { color: #ff0000; background: #00ff00; }
+    25% { color: #00ff00; background: #0000ff; }
+    50% { color: #0000ff; background: #ffff00; }
+    75% { color: #ffff00; background: #ff00ff; }
+    100% { color: #ff0000; background: #00ff00; }
+}
+
+/* Progress Bars */
+.fake-progress-section {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.fake-progress-section h2 {
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    animation: glitch 2s ease-in-out infinite;
+}
+
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.progress-bar {
+    background: #333;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #666;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b35, #f7931e, #ffd23f);
+    animation: progressPulse 2s ease-in-out infinite;
+    transition: width 10s ease;
+}
+
+@keyframes progressPulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.progress-bar span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Bottom Message */
+.bottom-message {
+    margin-top: 80px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    border: 3px solid #ff6b35;
+}
+
+.bottom-message h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffd23f;
+}
+
+.bottom-message p {
+    font-size: 1.3em;
+    line-height: 1.6;
+}
+
+/* Mobile Responsiveness (Deliberately Bad) */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2em;
+        overflow: hidden;
+    }
+    .crimes-grid {
+        grid-template-columns: 1fr;
+    }
+    .loading-bar {
+        width: 280px;
+    }
+    /* Make mobile experience even worse */
+    .crime-card {
+        transform: rotate(3deg);
+    }
+    .crime-card:nth-child(even) {
+        transform: rotate(-3deg);
+    }
+}
+
+/* Accessibility Violations (Don't actually do this) */
+button:focus {
+    outline: none !important;
+}
+
+input:focus {
+    outline: none !important;
+}
+
+/* Cursor Chaos */
+.crime-card:hover {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💀</text></svg>'), auto;
+}
+
+/* Hidden Elements for Screen Readers (Bad Practice) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Font Randomization */
+.font-1 { font-family: 'Comic Neue', cursive; }
+.font-2 { font-family: 'Creepster', cursive; }
+.font-3 { font-family: 'Griffy', cursive; }
+.font-4 { font-family: 'Nosifer', cursive; }
+.font-5 { font-family: 'Butcherman', cursive; }
+.font-6 { font-family: 'Times New Roman', serif; }
+.font-7 { font-family: 'Arial Black', sans-serif; }
+.font-8 { font-family: 'Courier New', monospace; }
+
+/* Auto-play Video Styles */
+#autoVideo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9997;
+    border: 5px solid #ff0000;
+    border-radius: 10px;
+}
+
+/* Scroll Hijacking */
+.scroll-hijack {
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
+
+/* Fake Selection Effect */
+.fake-selected {
+    background: #0078d4 !important;
+    color: white !important;
+}
+
+/* Mouse Followers */
+.cursor-follower {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9996;
+    font-size: 20px;
+    animation: spin 1s linear infinite;
+    transition: all 0.1s ease;
+}
+
+/* Additional Annoying Animations */
+@keyframes crazy-zoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+@keyframes seizure-flash {
+    0% { background: #ff0000; }
+    10% { background: #00ff00; }
+    20% { background: #0000ff; }
+    30% { background: #ffff00; }
+    40% { background: #ff00ff; }
+    50% { background: #00ffff; }
+    60% { background: #ffffff; }
+    70% { background: #000000; }
+    80% { background: #888888; }
+    90% { background: #444444; }
+    100% { background: #ff0000; }
+}
+
+/* Page Tilt */
+.tilted-page {
+    transform: rotate(2deg) !important;
+    transition: transform 1s ease;
+}
+
+/* Konami Code Effect */
+.konami-activated {
+    animation: crazy-zoom 0.5s ease-in-out infinite, seizure-flash 0.1s linear infinite;
+}
+
+/* Fake System Notifications */
+.system-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #0078d4;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    z-index: 9995;
+    animation: slideInRight 0.5s ease, fadeOut 0.5s ease 4.5s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Print Media Chaos */
+@media print {
+    body {
+        background: black !important;
+        color: white !important;
+    }
+    .crime-card {
+        border: 10px solid black !important;
+        background: yellow !important;
+    }
+}

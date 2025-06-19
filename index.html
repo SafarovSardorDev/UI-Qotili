@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Qotili</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Fake Loading Screen -->
+    <div class="fake-loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <h1 class="loading-title">🔄 Loading Amazing Content...</h1>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
+            <p class="loading-text" id="loadingText">Please wait 30 seconds... (Why? Because we can!)</p>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Auto-play Video (Hidden initially) -->
+    <video id="autoVideo" autoplay loop muted style="display: none;">
+        <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAr1tZGF0AAACrgYF//+q3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2MiByMzA4MSBkYTUyNzM5IC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMSAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" type="video/mp4">
+    </video>
+
+    <!-- Floating Elements -->
+    <div class="floating-crime-warning">🚨</div>
+    <div class="audio-warning">🔊 Audio warning: Annoying sounds ahead!</div>
+
+    <!-- Popup Ads Container -->
+    <div class="popup-ads" id="popupAds"></div>
+
+    <!-- CAPTCHA Modal -->
+    <div class="captcha-modal" id="captchaModal">
+        <div class="captcha-content">
+            <h3>🤖 CAPTCHA Required!</h3>
+            <p>To continue clicking, please solve this CAPTCHA:</p>
+            <div class="captcha-challenge" id="captchaChallenge"></div>
+            <input type="text" id="captchaInput" placeholder="Enter CAPTCHA">
+            <button onclick="verifyCaptcha()">Verify</button>
+            <p class="captcha-attempts">Attempts remaining: <span id="attemptsLeft">3</span></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1 class="title glitch-text">🚨 UX CRIME SCENE 2.0 🚨</h1>
+            <p class="subtitle dancing-element">Professional guide on how to destroy user experience</p>
+        </div>
+
+        <div class="crimes-grid">
+            <!-- Captcha Crime -->
+            <div class="crime-card">
+                <h3 class="crime-title">🤖 CAPTCHA Hell</h3>
+                <p>Every click requires CAPTCHA verification:</p>
+                <button class="criminal-button" onclick="requireCaptcha('You clicked a button!')">
+                    Click me (if you dare)
+                </button>
+                <button class="criminal-button" onclick="requireCaptcha('Another button clicked!')">
+                    Me too!
+                </button>
+            </div>
+
+            <!-- Text Selection Hell -->
+            <div class="crime-card no-select">
+                <h3 class="crime-title">📝 Selection Nightmare</h3>
+                <p class="unselectable">This text cannot be selected! Try to copy this important information: "API Key: 123456789abcdef". Good luck copying it!</p>
+                <div class="fake-selection" onmousedown="fakeSelect(event)">
+                    This text pretends to be selected but isn't!
+                </div>
+            </div>
+
+            <!-- Font Chaos -->
+            <div class="crime-card font-chaos">
+                <h3 class="crime-title">🎨 Font Madness</h3>
+                <p class="random-font">This text changes font every 2 seconds! Try reading this important information while the font keeps changing!</p>
+                <p class="random-font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <!-- Infinite Scroll Hell -->
+            <div class="crime-card">
+                <h3 class="crime-title">♾️ Infinite Emptiness</h3>
+                <p>Scroll down for more content... (spoiler: there isn't any)</p>
+                <div class="infinite-container" id="infiniteContainer">
+                    <div class="empty-content">Loading more content...</div>
+                    <div class="empty-content">Still loading...</div>
+                    <div class="empty-content">Please wait...</div>
+                    <div class="empty-content">Almost there...</div>
+                    <div class="empty-content">Just kidding, there's nothing here!</div>
+                </div>
+            </div>
+
+            <!-- Moving Elements -->
+            <div class="crime-card">
+                <h3 class="crime-title">🏃‍♂️ Escape Artists</h3>
+                <p>Try to click these buttons:</p>
+                <button class="moving-button" onclick="requireCaptcha('Caught me!')">
+                    Catch me if you can!
+                </button>
+                <button class="evasive-button" onmouseover="evadeClick(this)">
+                    I'm outta here!
+                </button>
+            </div>
+
+            <!-- Fake Errors -->
+            <div class="crime-card">
+                <h3 class="crime-title">💀 Error Festival</h3>
+                <div class="fake-errors">
+                    <div class="error-message">❌ ERROR 404: Your patience not found!</div>
+                    <div class="error-message">⚠️ WARNING: This site may cause severe headaches!</div>
+                    <div class="error-message">🚨 CRITICAL: UX designer has been fired!</div>
+                    <div class="error-message">💥 FATAL: Common sense.exe has stopped working!</div>
+                </div>
+            </div>
+
+            <!-- Video Chaos -->
+            <div class="crime-card">
+                <h3 class="crime-title">📹 Auto-Play Madness</h3>
+                <p>Videos that play automatically with sound:</p>
+                <button onclick="playAnnoyingVideo()" class="criminal-button">
+                    Start Video Chaos
+                </button>
+                <div class="video-warning">⚠️ Warning: Will play loud, annoying sounds!</div>
+            </div>
+
+            <!-- Invisible Content -->
+            <div class="crime-card">
+                <h3 class="crime-title">👻 Invisible Information</h3>
+                <p>Important content that you can't see:</p>
+                <div class="invisible-content">
+                    This is super important information that's completely invisible!
+                    The secret code is: INVISIBLE123
+                    But you'll never see it unless you accidentally hover here!
+                </div>
+            </div>
+
+            <!-- Pop-up Hell -->
+            <div class="crime-card">
+                <h3 class="crime-title">🎆 Pop-up Apocalypse</h3>
+                <p>Ads every 5 seconds because money > users:</p>
+                <button onclick="startPopupHell()" class="criminal-button">
+                    Start Ad Nightmare
+                </button>
+                <button onclick="stopPopupHell()" class="criminal-button">
+                    Stop (Good luck finding this!)
+                </button>
+            </div>
+
+            <!-- Color Chaos -->
+            <div class="crime-card rainbow-chaos">
+                <h3 class="crime-title">🌈 Rainbow Nightmare</h3>
+                <div class="color-chaos">
+                    <p>Reading this text will hurt your eyes!</p>
+                    <p>Colors change randomly every second!</p>
+                    <p>Accessibility? What's that?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fake Loading Elements -->
+        <div class="fake-progress-section">
+            <h2>📊 Progress Bars That Never Complete</h2>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 99%"></div>
+                    <span>Loading... 99% (since 2019)</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 97%"></div>
+                    <span>Installing updates... 97% (forever)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Message -->
+        <div class="bottom-message">
+            <h2 class="glitch-text">🎯 Perfect for your "How NOT to" portfolio!</h2>
+            <p>This website demonstrates every possible UX crime. Please don't actually build sites like this! 😄</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
